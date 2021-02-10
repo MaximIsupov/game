@@ -16,6 +16,8 @@
 (def health (ref {}))
 ; атаки всех игроков
 (def attack-values (ref {}))
+;  значения лечения всех игроков
+(def heals-values (ref {}))
 ;  очки игроков
 (def scores (ref {}))
 
@@ -27,6 +29,8 @@
 (def max-health 50)
 ; занчение базовой атаки
 (def base-attack-value 25)
+; изначальное значение лечения
+(def base-heal-value 0)
 ; время возрождения игрока
 (def respawn-time 100)
 ; очки за убийства игрока
@@ -107,7 +111,15 @@
            1)))
      0)))
 
-; heal
+      (defn heal [target]
+  "Heal the player.
+   Return 0 target don't exist or his health is full
+          1 process of heal was succesful"
+  (dosync
+    (if (<= (@health target) 50)
+      (do
+        (commute health assoc target (+ (@health target)  (@heals-values *name*) ))1)
+      0)))
 
 (defn get-health []
   "Get health value of current player"

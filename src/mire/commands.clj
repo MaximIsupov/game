@@ -188,7 +188,21 @@
 
 ; Attack Stefan
 
-; heal Max
+(defn heal
+  "Heal other player"
+  [target-number]
+  (if-let [target (nth (vec (disj @(:inhabitants @player/*current-room*) player/*name*)) (Integer/parseInt target-number))]
+    (case (player/heal target)
+      1 (do
+          (binding [*out* (player/streams target)]
+            (println)
+            (println (str "You was healed by " player/*name* "."))
+            (println (str "You hp now is " (@player/health target) "."))
+            (println)
+            (print player/prompt) (flush))
+          (str "You healed " target " succesfully." player/eol))
+      0 (str target " isn't here or his health is full." player/eol))
+    (str "There is not " target-number "th player here")))
 
 ;; Command data
 
@@ -205,7 +219,7 @@
                "help" help
                "score" score
                "attack" attack
-               ; heal Max
+               "heal" heal
                "status" status
                "get-existing-items" player/get-existing-items})
 

@@ -1,6 +1,6 @@
 (ns mire.map_generation)
 
-(def game_items (ref #{:Damage_str :maxBonus :bonus :bonus2 :Health_weak :Health_mid :Health_str}))
+(def game_items (ref #{:Damage_str :maxBonus :bonus :bonus2 :Health_weak :Health_mid :Health_str :heal_bonus}))
 
 (def rooms_graf_head (ref {}))
 

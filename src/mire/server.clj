@@ -42,10 +42,11 @@
        (.set player/*keys-count* 0)
        (commute player/existing-items conj
                 :Health_weak :Health_mid :Health_str :Damage_str :Damage_weak
-                             :Damage_mid :bonus2 :bonus :greatBonus)
+                             :Damage_mid :bonus2 :bonus :greatBonus :heal_bonus)
        (commute player/scores assoc player/*name* 0)
        (commute player/health assoc player/*name* player/max-health)
        (commute player/attack-values assoc player/*name* player/base-attack-value))
+       (commute player/heals-values assoc player/*name* player/base-heal-value))
 
       (println (commands/look)) (print player/prompt) (flush)
       (inc id)
